@@ -1,22 +1,27 @@
-﻿namespace Programming_Learning_App;
+namespace Programming_Learning_App;
 
-public interface ICommand 
+public interface ICommand
 {
-    public void Execute(Character character);
+    public void Execute(ExecutionContext context);
 }
 
-public class MoveCommand : ICommand 
+public class MoveCommand : ICommand
 {
     private int Steps;
 
-    public MoveCommand(int steps) 
+    public MoveCommand(int steps)
     {
         Steps = steps;
     }
 
-    public void Execute(Character character) 
+    public void Execute(ExecutionContext context)
     {
-        character.MoveForward();
+        for (int i = 0; i < Steps; i++)
+        {
+            context.Character.MoveForward();
+        }
+
+        context.Trace.Add("Move " + Steps);
     }
 }
 
@@ -27,11 +32,20 @@ public class TurnCommand : ICommand
     public TurnCommand(TurnDirection turn)
     {
         Turn = turn;
-    } 
+    }
 
-    public void Execute(Character character)
+    public void Execute(ExecutionContext context)
     {
-        character.Turn(Turn);
+        context.Character.Turn(Turn);
+
+        if (Turn == TurnDirection.Left)
+        {
+            context.Trace.Add("Turn left");
+        }
+        else
+        {
+            context.Trace.Add("Turn right");
+        }
     }
 }
 
@@ -46,13 +60,13 @@ public class RepeatCommand : ICommand
         Commands = commands;
     }
 
-    public void Execute(Character character)
+    public void Execute(ExecutionContext context)
     {
-        for (int i = 0; i < Count; i++) 
+        for (int i = 0; i < Count; i++)
         {
-            for (int j = 0; j < Commands.Count; j++) 
+            for (int j = 0; j < Commands.Count; j++)
             {
-                Commands[j].Execute(character);
+                Commands[j].Execute(context);
             }
         }
     }

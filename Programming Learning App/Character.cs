@@ -3,11 +3,14 @@
 public class Character
 {
     private Position position;
-    private Direction Facing;
-    private List<Position> Path;
+    public Direction Facing { get; private set; }
+    public List<Position> Path { get; }
+
+    public Position Position => position;
 
     public Character() {
-        
+        Facing = Direction.East;
+        Path = new List<Position>();
     }
 
     public void Turn(TurnDirection dir) 

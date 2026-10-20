@@ -1,14 +1,14 @@
 ﻿namespace Programming_Learning_App;
 
 
-struct ExecutionResult 
+public struct ExecutionResult
 {
     public List<string> Trace;
     public Position FinalPosition;
     public Direction FinalFacing;
 }
 
-struct Position
+public struct Position
 {
     public int X;
     public int Y;
@@ -39,8 +39,19 @@ public class BlockProgram
         Commands = commands;
     }
 
-    public ExecutionResult Execute() 
+    public ExecutionResult Execute()
     {
-        
+        ExecutionContext context = new ExecutionContext();
+
+        for (int i = 0; i < Commands.Count; i++)
+        {
+            Commands[i].Execute(context);
+        }
+
+        ExecutionResult result = new ExecutionResult();
+        result.Trace = context.Trace;
+        result.FinalPosition = context.Character.Position;
+        result.FinalFacing = context.Character.Facing;
+        return result;
     }
 }
