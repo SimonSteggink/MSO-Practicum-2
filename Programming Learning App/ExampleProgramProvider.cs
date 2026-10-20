@@ -8,6 +8,7 @@ public class ExampleProgramProvider
     public ExampleProgramProvider(IProgramParser parser)
     {
         Parser = parser;
+        rand = new Random();
     }
 
     public BlockProgram Basic() 
@@ -27,21 +28,14 @@ public class ExampleProgramProvider
     }
     public BlockProgram Random()
     {
-        string fileContent = File.ReadAllText("UserPrograms/Advanced.txt");
-
-        switch (rand.Next(2)) 
+        switch (rand.Next(3))
         {
             case 0:
-                fileContent = File.ReadAllText("UserPrograms/Basic.txt");
-                break;
+                return Basic();
             case 1:
-                fileContent = File.ReadAllText("UserPrograms/Advanced.txt");
-                break;
-            case 2:
-                fileContent = File.ReadAllText("UserPrograms/Expert.txt");
-                break;
+                return Advanced();
+            default:
+                return Expert();
         }
-
-        return Parser.Parse(fileContent);
     }
 }

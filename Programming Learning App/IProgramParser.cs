@@ -12,7 +12,7 @@ public class TextProgramParser : IProgramParser
     public BlockProgram Parse(string text) 
     {
         int index = 0;
-        string[] textList = text.Split('\n');
+        string[] textList = text.Replace("\r", "").Split('\n');
 
         List<ICommand> commands = ParseCommands(textList, ref index, 0);
         return new BlockProgram("Awesome", commands);
