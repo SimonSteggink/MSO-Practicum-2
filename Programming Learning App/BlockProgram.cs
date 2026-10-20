@@ -30,8 +30,8 @@ public enum TurnDirection
 
 public class BlockProgram
 {
-    private string Name;
-    private List<ICommand> Commands;
+    public string Name;
+    public List<ICommand> Commands;
 
     public BlockProgram(string name, List<ICommand> commands) 
     {

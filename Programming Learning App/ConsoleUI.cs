@@ -5,12 +5,12 @@ public class ConsoleUI
     private BlockProgram? current;
     private IProgramParser parser = new TextProgramParser();
     private ExampleProgramProvider examples;
-    private ProgramStats stats;
+    private StatsCalculator stats = new StatsCalculator();
 
     public ConsoleUI() 
     {
         examples = new ExampleProgramProvider(parser);
-        current = examples.RandomProgram();
+        current = examples.Random();
     }
 
     public void Run() 

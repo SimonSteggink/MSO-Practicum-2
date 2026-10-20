@@ -25,7 +25,7 @@ public class ExampleProgramProvider
         string fileContent = File.ReadAllText("UserPrograms/Expert.txt");
         return Parser.Parse(fileContent);
     }
-    public BlockProgram RandomProgram()
+    public BlockProgram Random()
     {
         string fileContent = File.ReadAllText("UserPrograms/Advanced.txt");
 

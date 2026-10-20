@@ -7,7 +7,7 @@ public interface ICommand
 
 public class MoveCommand : ICommand
 {
-    private int Steps;
+    public int Steps;
 
     public MoveCommand(int steps)
     {
@@ -27,7 +27,7 @@ public class MoveCommand : ICommand
 
 public class TurnCommand : ICommand
 {
-    private TurnDirection Turn;
+    public TurnDirection Turn;
 
     public TurnCommand(TurnDirection turn)
     {
@@ -51,22 +51,22 @@ public class TurnCommand : ICommand
 
 public class RepeatCommand : ICommand
 {
-    private int Count;
-    private List<ICommand> Commands;
+    public int Times;
+    public List<ICommand> Body;
 
     public RepeatCommand(int count, List<ICommand> commands)
     {
-        Count = count;
-        Commands = commands;
+        Times = count;
+        Body = commands;
     }
 
     public void Execute(ExecutionContext context)
     {
-        for (int i = 0; i < Count; i++)
+        for (int i = 0; i < Times; i++)
         {
-            for (int j = 0; j < Commands.Count; j++)
+            for (int j = 0; j < Body.Count; j++)
             {
-                Commands[j].Execute(context);
+                Body[j].Execute(context);
             }
         }
     }
