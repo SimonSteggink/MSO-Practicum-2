@@ -67,5 +67,7 @@ public class Character
                 position.X--;
                 break;
         }
+
+        Path.Add(position);
     }
 }
