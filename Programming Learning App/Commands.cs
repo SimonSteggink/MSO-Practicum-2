@@ -7,28 +7,53 @@ public interface ICommand
 
 public class MoveCommand : ICommand 
 {
-    int Steps;
+    private int Steps;
+
+    public MoveCommand(int steps) 
+    {
+        Steps = steps;
+    }
+
     public void Execute(Character character) 
-    { 
-    
+    {
+        character.MoveForward();
     }
 }
 
 public class TurnCommand : ICommand
 {
-    TurnDirection Turn; 
+    private TurnDirection Turn;
+
+    public TurnCommand(TurnDirection turn)
+    {
+        Turn = turn;
+    } 
+
     public void Execute(Character character)
     {
-
+        character.Turn(Turn);
     }
 }
 
 public class RepeatCommand : ICommand
 {
-    int Count;
-    List<ICommand> Commands;
+    private int Count;
+    private List<ICommand> Commands;
+
+    public RepeatCommand(int count, List<ICommand> commands)
+    {
+        Count = count;
+        Commands = commands;
+    }
+
     public void Execute(Character character)
     {
-
+        for (int i = 0; i < Count; i++) 
+        {
+            for (int j = 0; j < Commands.Count; j++) 
+            {
+                Commands[j].Execute(character);
+            }
+        }
     }
 }

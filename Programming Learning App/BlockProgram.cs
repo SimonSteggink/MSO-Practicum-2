@@ -14,7 +14,7 @@ struct Position
     public int Y;
 }
 
-enum Direction
+public enum Direction
 {
     North,
     East,
@@ -22,7 +22,7 @@ enum Direction
     West
 }
 
-enum TurnDirection 
+public enum TurnDirection 
 {
     Left,
     Right
@@ -30,8 +30,8 @@ enum TurnDirection
 
 public class BlockProgram
 {
-    string Name;
-    List<ICommand> Commands;
+    private string Name;
+    private List<ICommand> Commands;
 
     public ExecutionResult Execute() 
     {

@@ -2,10 +2,10 @@
 
 public class ConsoleUI
 {
-    BlockProgram? current;
-    IProgramParser parser;
-    ExampleProgramProvider examples = new();
-    ProgramStats stats;
+    private BlockProgram? current;
+    private IProgramParser parser;
+    private ExampleProgramProvider examples = new();
+    private ProgramStats stats;
 
     public ConsoleUI() {
         
