@@ -33,6 +33,12 @@ public class BlockProgram
     private string Name;
     private List<ICommand> Commands;
 
+    public BlockProgram(string name, List<ICommand> commands) 
+    {
+        Name = name;
+        Commands = commands;
+    }
+
     public ExecutionResult Execute() 
     {
         
