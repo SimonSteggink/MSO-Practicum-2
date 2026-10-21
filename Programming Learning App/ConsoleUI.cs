@@ -46,7 +46,7 @@ public class ConsoleUI
                         current = examples.Random();
                         break;
                     default:
-                        current = parser.Parse(File.ReadAllText(input));
+                        current = parser.Parse(File.ReadAllText(input.Trim().Trim('"')));
                         break;
                 }
             }
