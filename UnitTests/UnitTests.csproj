@@ -18,4 +18,8 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\Programming Learning App\Programming Learning App.csproj"/>
+    </ItemGroup>
+
 </Project>

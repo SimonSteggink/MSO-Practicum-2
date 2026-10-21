@@ -11,9 +11,23 @@ public class StatsCalculator
     public ProgramStats Calculate(BlockProgram p) 
     {
         ProgramStats stats = new ProgramStats();
-        stats.Commands = p.Commands.Count;
-        stats.Repeats = p.Commands.OfType<RepeatCommand>().Count();
-        stats.MaxNesting = (p.Commands.OfType<RepeatCommand>().Select(rc => rc.Body.OfType<RepeatCommand>().Count()).DefaultIfEmpty(0).Max()) + 1;
+        Visit(p.Commands, 0, ref stats);
         return stats;
+    }
+
+    // Walks the command tree, so commands inside repeat bodies are counted too
+    private void Visit(List<ICommand> commands, int depth, ref ProgramStats stats)
+    {
+        foreach (ICommand command in commands)
+        {
+            stats.Commands++;
+
+            if (command is RepeatCommand repeat)
+            {
+                stats.Repeats++;
+                stats.MaxNesting = Math.Max(stats.MaxNesting, depth + 1);
+                Visit(repeat.Body, depth + 1, ref stats);
+            }
+        }
     }
 }
